@@ -7,5 +7,5 @@ def latex(formula):
         anser = LATEX(formula)
         return anser
     except:
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
         return "Error"

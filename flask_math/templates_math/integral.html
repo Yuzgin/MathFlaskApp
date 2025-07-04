@@ -1,97 +1,172 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2 class="left"><a href="{{url_for('Math.integral_view',dimension='2D')}}" class="heading">積分</a>
+<h2 class="left">
+  <a href="{{ url_for('Math.integral_view', dimension='2D') }}" class="heading">Integration</a>
 </h2>
 
 <div class="right">
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      選択してください
+    <button class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false">
+      Please select
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="{{url_for('Math.integral_view',dimension='2D')}}">積分</a>
-      <a class="dropdown-item" href="{{url_for('Math.integral_view',dimension='3D')}}">重積分</a>
+      <a class="dropdown-item"
+         href="{{ url_for('Math.integral_view', dimension='2D') }}">Integration</a>
+      <a class="dropdown-item"
+         href="{{ url_for('Math.integral_view', dimension='3D') }}">Multiple Integral</a>
     </div>
   </div>
-</div><br><br><br>
+</div>
+<br><br><br>
 
-<form action='{{url_for("Math.integral_view",dimension=dimension)}}' method="post">
-  <!-- 関数などの入力 -->
+<form action="{{ url_for('Math.integral_view', dimension=dimension) }}" method="post">
+  <!-- Function input -->
   <div class="form-group">
-    <label for="InputFormula">被積分関数\(f(x)\)を入力してください</label>
+    <label for="InputFormula">Please enter the integrand \(f(x)\)</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><small>\(f(x)=\)</small></span>
       </div>
-      <input type="text" name="formula" class="form-control" id="InputFormula" value="{{formula}}" placeholder="function">
+      <input type="text"
+             name="formula"
+             class="form-control"
+             id="InputFormula"
+             value="{{ formula }}"
+             placeholder="function">
     </div>
   </div>
-  {% if dimension=="2D" %}
+
+  {% if dimension == "2D" %}
   <div class="form-group">
-    <label for="InputUpperEnd_x">上端を入力してください</label>
-    <input type="text" name="upper_end_x" class="form-control" id="InputUpperEnd_x" value="{{upper_end_x}}" placeholder="upper end">
+    <label for="InputUpperEnd_x">Please enter the upper limit</label>
+    <input type="text"
+           name="upper_end_x"
+           class="form-control"
+           id="InputUpperEnd_x"
+           value="{{ upper_end_x }}"
+           placeholder="upper end">
   </div>
   <div class="form-group">
-    <label for="InputLowerEnd_x">下端を入力してください</label>
-    <input type="text" name="lower_end_x" class="form-control" id="InputLowerEnd_x" value="{{lower_end_x}}" placeholder="lower end">
+    <label for="InputLowerEnd_x">Please enter the lower limit</label>
+    <input type="text"
+           name="lower_end_x"
+           class="form-control"
+           id="InputLowerEnd_x"
+           value="{{ lower_end_x }}"
+           placeholder="lower end">
   </div>
-  {% elif dimension=="3D" %}
+
+  {% elif dimension == "3D" %}
   <div class="form-group">
-    <label for="InputUpperEnd_x">\(x\)の上端を入力してください</label>
-    <input type="text" name="upper_end_x" class="form-control" id="InputUpperEnd_x" value="{{upper_end_x}}" placeholder="upper end x">
+    <label for="InputUpperEnd_x">Please enter the upper limit for \(x\)</label>
+    <input type="text"
+           name="upper_end_x"
+           class="form-control"
+           id="InputUpperEnd_x"
+           value="{{ upper_end_x }}"
+           placeholder="upper end x">
   </div>
   <div class="form-group">
-    <label for="InputLowerEnd_x">\(x\)の下端を入力してください</label>
-    <input type="text" name="lower_end_x" class="form-control" id="InputLowerEnd_x" value="{{lower_end_x}}" placeholder="lower end x">
+    <label for="InputLowerEnd_x">Please enter the lower limit for \(x\)</label>
+    <input type="text"
+           name="lower_end_x"
+           class="form-control"
+           id="InputLowerEnd_x"
+           value="{{ lower_end_x }}"
+           placeholder="lower end x">
   </div>
   <div class="form-group">
-    <label for="InputUpperEnd_y">\(y\)の上端を入力してください</label>
-    <input type="text" name="upper_end_y" class="form-control" id="InputUpperEnd_y" value="{{upper_end_y}}" placeholder="upper end y">
+    <label for="InputUpperEnd_y">Please enter the upper limit for \(y\)</label>
+    <input type="text"
+           name="upper_end_y"
+           class="form-control"
+           id="InputUpperEnd_y"
+           value="{{ upper_end_y }}"
+           placeholder="upper end y">
   </div>
   <div class="form-group">
-    <label for="InputLowerEnd_y">\(y\)の下端を入力してください</label>
-    <input type="text" name="lower_end_y" class="form-control" id="InputLowerEnd_y" value="{{lower_end_y}}" placeholder="lower end y">
+    <label for="InputLowerEnd_y">Please enter the lower limit for \(y\)</label>
+    <input type="text"
+           name="lower_end_y"
+           class="form-control"
+           id="InputLowerEnd_y"
+           value="{{ lower_end_y }}"
+           placeholder="lower end y">
   </div>
   {% endif %}
 
-  <!-- 演算の選択 -->
+  <!-- Operation selection -->
   <div class="center">
     <div class="radioArea" id="makeImg">
-    {% if dimension=="2D" %}
-      {% if type=="indefinite_integral" %}
-      <input type="radio" name="type" id="r1" value="indefinite_integral" checked><label for="r1">不定積分</label>
-      <input type="radio" name="type" id="r2" value="definite_integral_1"><label for="r2">定積分</label>
-      <input type="radio" name="type" id="r3" value="definite_integral_2"><label for="r3">定積分(小数表示)</label>
-      {% elif type=="definite_integral_1" %}
-      <input type="radio" name="type" id="r1" value="indefinite_integral"><label for="r1">不定積分</label>
-      <input type="radio" name="type" id="r2" value="definite_integral_1" checked><label for="r2">定積分</label>
-      <input type="radio" name="type" id="r3" value="definite_integral_2"><label for="r3">定積分(小数表示)</label>
-      {% elif type=="definite_integral_2" %}
-      <input type="radio" name="type" id="r1" value="indefinite_integral"><label for="r1">不定積分</label>
-      <input type="radio" name="type" id="r2" value="definite_integral_1"><label for="r2">定積分</label>
-      <input type="radio" name="type" id="r3" value="definite_integral_2" checked><label for="r3">定積分(小数表示)</label>
+      {% if dimension == "2D" %}
+        {% if type == "indefinite_integral" %}
+        <input type="radio" name="type" id="r1" value="indefinite_integral" checked>
+        <label for="r1">Indefinite Integral</label>
+
+        <input type="radio" name="type" id="r2" value="definite_integral_1">
+        <label for="r2">Definite Integral</label>
+
+        <input type="radio" name="type" id="r3" value="definite_integral_2">
+        <label for="r3">Definite Integral (Decimal)</label>
+        {% elif type == "definite_integral_1" %}
+        <input type="radio" name="type" id="r1" value="indefinite_integral">
+        <label for="r1">Indefinite Integral</label>
+
+        <input type="radio" name="type" id="r2" value="definite_integral_1" checked>
+        <label for="r2">Definite Integral</label>
+
+        <input type="radio" name="type" id="r3" value="definite_integral_2">
+        <label for="r3">Definite Integral (Decimal)</label>
+        {% elif type == "definite_integral_2" %}
+        <input type="radio" name="type" id="r1" value="indefinite_integral">
+        <label for="r1">Indefinite Integral</label>
+
+        <input type="radio" name="type" id="r2" value="definite_integral_1">
+        <label for="r2">Definite Integral</label>
+
+        <input type="radio" name="type" id="r3" value="definite_integral_2" checked>
+        <label for="r3">Definite Integral (Decimal)</label>
+        {% endif %}
+
+      {% elif dimension == "3D" %}
+        {% if type == "multiple_integral_1" %}
+        <input type="radio" name="type" id="r1" value="multiple_integral_1" checked>
+        <label for="r1">Multiple Integral</label>
+
+        <input type="radio" name="type" id="r2" value="multiple_integral_2">
+        <label for="r2">Multiple Integral (Decimal)</label>
+        {% elif type == "multiple_integral_2" %}
+        <input type="radio" name="type" id="r1" value="multiple_integral_1">
+        <label for="r1">Multiple Integral</label>
+
+        <input type="radio" name="type" id="r2" value="multiple_integral_2" checked>
+        <label for="r2">Multiple Integral (Decimal)</label>
+        {% endif %}
       {% endif %}
-    {% elif dimension=="3D" %}
-      {% if type=="multiple_integral_1" %}
-      <input type="radio" name="type" id="r1" value="multiple_integral_1" checked><label for="r1">重積分</label>
-      <input type="radio" name="type" id="r2" value="multiple_integral_2"><label for="r2">重積分(小数表示)</label>
-      {% elif type=="multiple_integral_2" %}
-      <input type="radio" name="type" id="r1" value="multiple_integral_1"><label for="r1">重積分</label>
-      <input type="radio" name="type" id="r2" value="multiple_integral_2" checked><label for="r2">重積分(小数表示)</label>
-      {% endif %}
-    {% endif %}
     </div>
   </div>
+
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">式入力</button>
-    {% if init_flag==1 %}
+    <button class="btn btn-secondary btn-block"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapse_1"
+            aria-expanded="true"
+            aria-controls="collapse_1">Expression Input</button>
+
+    {% if init_flag == 1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
     </div>
@@ -101,16 +176,16 @@
     </div>
     {% endif %}
   </div>
-</div><br>
+</div>
+<br>
 <script type="text/javascript" src="static_math/js/button_x.js"></script>
 
-
-{% if init_flag==0 %}
+{% if init_flag == 0 %}
 <div class="center">
-  <h4 class="latex">\({{anser}}\)</h4><br>
+  <h4 class="latex">\({{ anser }}\)</h4><br>
   <h5>\(\LaTeX\)</h5>
-  <h5 class="latex" id="targetID">{{anser}}</h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <h5 class="latex" id="targetID">{{ anser }}</h5><br>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

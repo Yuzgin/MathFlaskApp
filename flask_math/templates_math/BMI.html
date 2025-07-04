@@ -1,27 +1,27 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href="{{url_for('Math.BMI_view')}}" class="heading">BMI</a></h2>
+<h2><a href="{{ url_for('Math.BMI_view') }}" class="heading">BMI</a></h2>
 <br>
 
-<form action='{{url_for("Math.BMI_view")}}' method="post" enctype="multipart/form-data">
+<form action="{{ url_for('Math.BMI_view') }}" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="InputFormula">身長(cm)を入力してください</label><br>
-    <input type="text" name="height" class="form-control" id="InputFormula" value="{{height}}" placeholder="height">
+    <label for="InputFormula">Please enter height (cm)</label><br>
+    <input type="text" name="height" class="form-control" id="InputFormula" value="{{ height }}" placeholder="height">
   </div>
   <div class="form-group">
-    <label for="InputFormula_2">体重(kg)を入力してください</label><br>
-    <input type="text" name="weight" class="form-control" id="InputFormula_2" value="{{weight}}" placeholder="weight">
+    <label for="InputFormula_2">Please enter weight (kg)</label><br>
+    <input type="text" name="weight" class="form-control" id="InputFormula_2" value="{{ weight }}" placeholder="weight">
   </div>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">身長入力</button>
-    {% if init_flag==1 %}
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Height Input</button>
+    {% if init_flag == 1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
     </div>
@@ -32,7 +32,7 @@
     {% endif %}
   </div>
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" aria-controls="collapse_2">体重入力</button>
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" aria-controls="collapse_2">Weight Input</button>
     <div id="collapse_2" class="collapse" aria-labelledby="heading_2" data-parent="#accordion_1">
       <div id="parent_2"></div>
     </div>
@@ -40,19 +40,18 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x_2.js"></script>
 
-
-{% if init_flag==0 %}
+{% if init_flag == 0 %}
 <div class="center">
   {% for anser in Anser %}
-  <h4 class="latex">\({{anser}}\)</h4>
+  <h4 class="latex">\({{ anser }}\)</h4>
   {% endfor %}<br>
   <h5>\(\LaTeX\)</h5>
   <h5 class="latex" id="targetID">
     {% for anser in Anser %}
-    <pre>{{anser}}</pre>
+    <pre>{{ anser }}</pre>
     {% endfor %}
   </h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

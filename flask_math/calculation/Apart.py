@@ -10,5 +10,5 @@ def Apart(formula):
         anser = LATEX(formula) + "=" + LATEX(anser)
     except:
         anser = "Error"
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return anser

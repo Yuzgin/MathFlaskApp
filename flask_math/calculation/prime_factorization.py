@@ -19,5 +19,5 @@ def prime_factorization(number):
         anser = str(number)+" = "+C
     except:
         anser = "Error"
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return anser

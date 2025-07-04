@@ -9,5 +9,5 @@ def Factorial(formula):
         anser = LATEX(formula)+"! = "+LATEX(A)
     except:
         anser = "Error"
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return anser

@@ -27,7 +27,7 @@
   }
 </style>
 
-<h2><a href="{{url_for('Math.lim_view')}}" class="heading">極限</a></h2>
+<h2><a href="{{url_for('Math.lim_view')}}" class="heading">Limit</a></h2>
 <br>
 
 <form action="{{url_for('Math.lim_view')}}" method="post" enctype="multipart/form-data">
@@ -60,39 +60,38 @@
     </div>
   </div><br>
 
-
-  <!-- 演算の選択 -->
+  <!-- Select operation -->
   <div class="center">
     <div class="radioArea" id="makeImg">
       {% if type=="left" %}
-      <input type="radio" name="type" id="r1" value="left" checked><label for="r1">左側極限</label>
+      <input type="radio" name="type" id="r1" value="left" checked><label for="r1">Left-hand limit</label>
       {% else %}
-      <input type="radio" name="type" id="r1" value="left"><label for="r1">左側極限</label>
+      <input type="radio" name="type" id="r1" value="left"><label for="r1">Left-hand limit</label>
       {% endif %}
 
       {% if type=="both" %}
-      <input type="radio" name="type" id="r2" value="both" checked><label for="r2">両極限</label>
+      <input type="radio" name="type" id="r2" value="both" checked><label for="r2">Two-sided limit</label>
       {% else %}
-      <input type="radio" name="type" id="r2" value="both"><label for="r2">両極限</label>
+      <input type="radio" name="type" id="r2" value="both"><label for="r2">Two-sided limit</label>
       {% endif %}
 
       {% if type=="right" %}
-      <input type="radio" name="type" id="r3" value="right" checked><label for="r3">右側極限</label>
+      <input type="radio" name="type" id="r3" value="right" checked><label for="r3">Right-hand limit</label>
       {% else %}
-      <input type="radio" name="type" id="r3" value="right"><label for="r3">右側極限</label>
+      <input type="radio" name="type" id="r3" value="right"><label for="r3">Right-hand limit</label>
       {% endif %}
     </div>
   </div><br>
 
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
     <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1"
-      aria-expanded="true" aria-controls="collapse_1">式入力</button>
+      aria-expanded="true" aria-controls="collapse_1">Expression Input</button>
     {% if init_flag==1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
@@ -106,7 +105,6 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x.js"></script>
 
-
 {% if init_flag==0 %}
 <div class="center">
   <h4 class="latex">\[{{anser}}\]</h4><br>
@@ -114,7 +112,7 @@
   <h5 class="latex" id="targetID">
     {{anser}}
   </h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

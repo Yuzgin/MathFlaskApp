@@ -26,5 +26,5 @@ def integral(formula, Up, Low, type):
                     anser += LATEX(A.evalf())
     except:
         anser = "Error"
-        flash("エラー:もう一度入力してください")
+        flash("Please re-enter the input")
     return anser

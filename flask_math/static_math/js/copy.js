@@ -9,9 +9,9 @@ function copy() {
     const succeeded = document.execCommand('copy');
 
     if (succeeded) {
-        alert('コピーが成功しました！');
+        alert('Copy successful!');
     } else {
-        alert('コピーが失敗しました!');
+        alert('Copy failed!');
     }
     selection.removeAllRanges();
 }

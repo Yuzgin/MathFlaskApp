@@ -20,5 +20,5 @@ def taylor(formula, dimension, center):
         Anser = [anser_1, anser_2]
     except:
         Anser = ["Error", ""]
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return Anser

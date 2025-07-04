@@ -6,21 +6,22 @@ from flask_math.calculation.common.STR import LATEX
 def equation(formula, type):
     try:
         x = Symbol('x')
-        A = solve(formula, dict=True)
-        Anser = ["方程式:" + LATEX(formula) + "=0", ""]
-        if (type == "analytical"):
-            for i in range(len(A)):
-                a = A[i]
-                for B in a.items():
-                    anser = LATEX(B[0]) + "=" + LATEX(B[1])
-                    Anser.append(anser)
-        elif (type == "numerical"):
-            for i in range(len(A)):
-                a = A[i]
-                for B in a.items():
-                    anser = LATEX(B[0]) + "=" + LATEX(B[1].evalf())
-                    Anser.append(anser)
+        solutions = solve(formula, dict=True)
+        result = ["Equation: " + LATEX(formula) + " = 0", ""]
+
+        if type == "analytical":
+            for sol in solutions:
+                for var, value in sol.items():
+                    answer = LATEX(var) + " = " + LATEX(value)
+                    result.append(answer)
+
+        elif type == "numerical":
+            for sol in solutions:
+                for var, value in sol.items():
+                    answer = LATEX(var) + " = " + LATEX(value.evalf())
+                    result.append(answer)
     except:
-        Anser = ["Error"]
-        flash("エラー：もう一度入力してください")
-    return Anser
+        result = ["Error"]
+        flash("Error: Please re-enter the input")
+    
+    return result

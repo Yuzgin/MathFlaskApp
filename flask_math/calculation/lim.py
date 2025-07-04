@@ -25,5 +25,5 @@ def lim(formula, a, type):
         anser = "\lim_{x \\to "+STR_a+" }"+LATEX(formula)+"="+LATEX(A)
     except:
         anser = "Error"
-        flash("エラー:もう一度関数を入力してください")
+        flash("Error: Please re-enter the input")
     return anser

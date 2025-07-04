@@ -1,23 +1,23 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href='{{url_for("Math.base_conversion_view")}}' class="heading">進数変換</a></h2>
+<h2><a href="{{ url_for('Math.base_conversion_view') }}" class="heading">Base Conversion</a></h2>
 <br>
 
-<form action='{{url_for("Math.base_conversion_view")}}' method="post" enctype="multipart/form-data">
+<form action="{{ url_for('Math.base_conversion_view') }}" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="BeforeConversion">変換前(2進法0b 8進法0h 10進法0d 16進法0x)</label>
-    <input type="text" name="before_conversion" class="form-control" id="BeforeConversion" value="{{before_conversion}}" placeholder="before_conversion">
+    <label for="BeforeConversion">Input value (binary: prefix 0b, octal: prefix 0h, decimal: prefix 0d, hexadecimal: prefix 0x)</label>
+    <input type="text" name="before_conversion" class="form-control" id="BeforeConversion" value="{{ before_conversion }}" placeholder="before_conversion">
   </div><br>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">数字入力</button>
-    {% if init_flag==1 %}
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Number Input</button>
+    {% if init_flag == 1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
     </div>
@@ -30,19 +30,18 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x_base.js"></script>
 
-
-{% if init_flag==0 %}
+{% if init_flag == 0 %}
 <div class="center">
   {% for anser in Anser %}
-  <h4 class="latex">\({{anser}}\)</h4>
+  <h4 class="latex">\({{ anser }}\)</h4>
   {% endfor %}<br>
   <h5>\(\LaTeX\)</h5>
   <h5 class="latex" id="targetID">
     {% for anser in Anser %}
-    {{anser}}
+      {{ anser }}
     {% endfor %}
   </h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

@@ -1,45 +1,45 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href="{{url_for('Math.equation_view')}}" class="heading">方程式</a></h2>
+<h2><a href="{{ url_for('Math.equation_view') }}" class="heading">Equation</a></h2>
 <br>
 
-<form action='{{url_for("Math.equation_view")}}' method="post" enctype="multipart/form-data">
-  <!-- 入力欄   -->
+<form action="{{ url_for('Math.equation_view') }}" method="post" enctype="multipart/form-data">
+  <!-- input field -->
   <div class="form-group">
-    <label for="InputFormula">方程式を入力してください</label><br>
+    <label for="InputFormula">Please enter the equation</label><br>
     <div class="input-group">
-      <input type="text" name="formula" class="form-control" id="InputFormula" value="{{formula}}" placeholder="equation">
+      <input type="text" name="formula" class="form-control" id="InputFormula" value="{{ formula }}" placeholder="equation">
       <div class="input-group-append">
         <span class="input-group-text">=0</span>
       </div>
     </div>
   </div><br>
-  <!-- 表示形式の選択 -->
+  <!-- output format selection -->
   <div class="center">
     <div class="radioArea" id="makeImg">
-      {% if type=="analytical" %}
-      <input type="radio" name="type" id="r1" value="analytical" checked><label for="r1">解析解</label>
+      {% if type == "analytical" %}
+      <input type="radio" name="type" id="r1" value="analytical" checked><label for="r1">Analytical solution</label>
       {% else %}
-      <input type="radio" name="type" id="r1" value="analytical"><label for="r1">解析解</label>
+      <input type="radio" name="type" id="r1" value="analytical"><label for="r1">Analytical solution</label>
       {% endif %}
 
-      {% if type=="numerical" %}
-      <input type="radio" name="type" id="r2" value="numerical" checked><label for="r2">数値解析解</label>
+      {% if type == "numerical" %}
+      <input type="radio" name="type" id="r2" value="numerical" checked><label for="r2">Numerical solution</label>
       {% else %}
-      <input type="radio" name="type" id="r2" value="numerical"><label for="r2">数値解析解</label>
+      <input type="radio" name="type" id="r2" value="numerical"><label for="r2">Numerical solution</label>
       {% endif %}
     </div>
   </div>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">微分方程式入力</button>
-    {% if init_flag==1 %}
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Differential Equation Input</button>
+    {% if init_flag == 1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
     </div>
@@ -52,19 +52,18 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x.js"></script>
 
-
-{% if init_flag==0 %}
+{% if init_flag == 0 %}
 <div class="center">
   {% for anser in Anser %}
-  <h4 class="latex">\({{anser}}\)</h4>
+  <h4 class="latex">\({{ anser }}\)</h4>
   {% endfor %}<br>
   <h5>\(\LaTeX\)</h5>
   <h5 class="latex" id="targetID">
     {% for anser in Anser %}
-      {{anser}}
+      {{ anser }}
     {% endfor %}
   </h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

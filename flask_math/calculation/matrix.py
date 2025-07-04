@@ -11,99 +11,99 @@ def calculation(matrixA, type):
         A, Ar, Ac = MATRIX(matrixA)
 
         if(type == "A"):
-            anser = "A="+LATEX(A)
+            anser = "A=" + LATEX(A)
 
         elif(type == "A^n"):
             if(Ar == Ac):
                 P, D = list(A.diagonalize())
                 for i in range(Ac):
-                    D[i, i] = "("+str(D[i, i])+")^n"
-                anser = "A^n="+LATEX(P*D*P.inv())
+                    D[i, i] = "(" + str(D[i, i]) + ")^n"
+                anser = "A^n=" + LATEX(P * D * P.inv())
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "A^{-1}":
             if(Ar == Ac):
-                anser = "A^{-1}="+LATEX(A.inv())
+                anser = "A^{-1}=" + LATEX(A.inv())
             else:
                 AT = A.transpose()
                 try:
-                    Ap = AT*((A*AT).inv())
+                    Ap = AT * ((A * AT).inv())
                 except:
-                    Ap = ((AT*A).inv())*AT
+                    Ap = ((AT * A).inv()) * AT
 
-                r1, c1 = (A*AT).shape
-                r2, c2 = (AT*A).shape
+                r1, c1 = (A * AT).shape
+                r2, c2 = (AT * A).shape
 
                 if(r1 >= r2):
-                    λ = list((AT*A).eigenvals())
+                    λ = list((AT * A).eigenvals())
                 else:
-                    λ = list((A*AT).eigenvals())
+                    λ = list((A * AT).eigenvals())
                 σ = [sqrt(λ[i]) for i in range(len(λ))]
-                anser = "A^{+}="+LATEX(Ap)
+                anser = "A^{+}=" + LATEX(Ap)
 
         elif type == "A^t":
-            anser = "A^T="+LATEX(A.transpose())
+            anser = "A^T=" + LATEX(A.transpose())
 
         elif type == "\widetilde{A}":
             if(Ar == Ac):
-                anser = "\widetilde{A}="+LATEX(A.adjugate())
+                anser = "\widetilde{A}=" + LATEX(A.adjugate())
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "det(A)":
             if(Ar == Ac):
-                anser = "det(A)="+LATEX(A.det())
+                anser = "det(A)=" + LATEX(A.det())
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "rank(A)":
-            anser = "rank(A)="+LATEX(A.rank())
+            anser = "rank(A)=" + LATEX(A.rank())
 
         elif type == "tr(A)":
             if(Ar == Ac):
-                anser = "tr(A)="+LATEX(A.trace())
+                anser = "tr(A)=" + LATEX(A.trace())
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "λ":
             if(Ar == Ac):
                 A = A.eigenvals()
                 anser = ""
                 for B in A.items():
-                    anser += ("\lambda="+LATEX(B[0])+"(n="+LATEX(B[1])+"), ")
+                    anser += ("\lambda=" + LATEX(B[0]) + "(n=" + LATEX(B[1]) + "), ")
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "P":
             if(Ar == Ac):
                 A = list(A.diagonalize())
-                anser = "P="+LATEX(A[0])
+                anser = "P=" + LATEX(A[0])
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "P^{-1}AP":
             if(Ar == Ac):
                 A = list(A.diagonalize())
-                anser = "P^{-1}AP="+LATEX(A[1])
+                anser = "P^{-1}AP=" + LATEX(A[1])
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
         elif type == "Φ(t)":
             if(Ar == Ac):
-                anser = "Φ(t)="+LATEX((s*eye(Ar)-A).inv())
+                anser = "Φ(t)=" + LATEX((s * eye(Ar) - A).inv())
             else:
-                flash("Error:正方行列を入力してください")
-                anser = "正方行列を入力してください"
+                flash("Error: Please enter a square matrix")
+                anser = "Please enter a square matrix"
 
     except:
         anser = "Error"
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return anser

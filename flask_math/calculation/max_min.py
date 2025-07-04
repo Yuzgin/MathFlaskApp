@@ -31,12 +31,12 @@ def max_min(formula):
                     b = det.subs(var, B[1])
                     c = formula.subs(var, B[1])
                     if b >= 0:
-                        anser = "極小値　f("+LATEX(B[1])+") = "+LATEX(c)
+                        anser = "Local minimum f(" + LATEX(B[1]) + ") = " + LATEX(c)
                         Min_Anser.append(anser)
                     else:
-                        anser = "極大値　f("+LATEX(B[1])+") = "+LATEX(c)
+                        anser = "Local maximum f(" + LATEX(B[1]) + ") = " + LATEX(c)
                         Max_Anser.append(anser)
-            Anser = ["f("+LATEX(var)+")="+LATEX(formula)]+Max_Anser+Min_Anser
+            Anser = ["f(" + LATEX(var) + ")=" + LATEX(formula)] + Max_Anser + Min_Anser
         else:
             A = solve([f_x, f_y])
             B = []
@@ -53,28 +53,28 @@ def max_min(formula):
                     D.append(C[1])
                 B.append(D)
 
-            Anser = ["f(x,y)="+LATEX(formula)]
+            Anser = ["f(x,y)=" + LATEX(formula)]
             for j in range(len(B)):
                 a, b = B[j]
 
-                D = f_xx*f_yy-(f_xy)**2
+                D = f_xx * f_yy - (f_xy) ** 2
                 D = D.subs([(x, a), (y, b)])
                 f_xx = f_xx.subs([(x, a), (y, b)])
                 if D > 0:
                     if f_xx > 0:
-                        anser = "極小値 f("+LATEX(a)+","+LATEX(b)+")=" + \
-                            LATEX(formula.subs([(x, a), (y, b)]))
+                        anser = "Local minimum f(" + LATEX(a) + "," + LATEX(b) + ")=" + \
+                                LATEX(formula.subs([(x, a), (y, b)]))
                     else:
-                        anser = "極大値 f("+LATEX(a)+","+LATEX(b)+")=" + \
-                            LATEX(formula.subs([(x, a), (y, b)]))
+                        anser = "Local maximum f(" + LATEX(a) + "," + LATEX(b) + ")=" + \
+                                LATEX(formula.subs([(x, a), (y, b)]))
                 elif D < 0:
-                    anser = "点("+LATEX(a)+","+LATEX(b)+")で極値をとらない"
+                    anser = "No extremum at point (" + LATEX(a) + "," + LATEX(b) + ")"
                 else:
-                    anser = "点("+LATEX(a)+","+LATEX(b)+")での極値は判別できない"
+                    anser = "Cannot determine extremum at point (" + LATEX(a) + "," + LATEX(b) + ")"
                 Anser.append(anser)
         if len(Anser) == 1:
-            Anser.append("極値をとらない")
+            Anser.append("No extrema found")
     except:
         Anser = ["Error"]
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return Anser

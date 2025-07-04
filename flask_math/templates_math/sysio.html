@@ -3,34 +3,34 @@
 {% block body %}
 <h2 class="left">
   {% if type=="s" %}
-  <a href="{{url_for('Math.sysio_view',type='s')}}" class="heading">システム入出力(s領域)</a>
+  <a href="{{url_for('Math.sysio_view',type='s')}}" class="heading">System Input/Output (s-domain)</a>
   {% elif type=="t" %}
-  <a href="{{url_for('Math.sysio_view',type='t')}}" class="heading">システム入出力(時間領域)</a>
+  <a href="{{url_for('Math.sysio_view',type='t')}}" class="heading">System Input/Output (Time Domain)</a>
   {% elif type=="m" %}
-  <a href="{{url_for('Math.sysio_view',type='m')}}" class="heading">システム入出力(状態空間表現)</a>
+  <a href="{{url_for('Math.sysio_view',type='m')}}" class="heading">System Input/Output (State-Space Representation)</a>
   {% endif %}
 </h2>
 <div class="right">
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      選択してください
+      Please select
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="{{url_for('Math.sysio_view',type='s')}}">s領域</a>
-      <a class="dropdown-item" href="{{url_for('Math.sysio_view',type='t')}}">時間領域</a>
-      <a class="dropdown-item" href="{{url_for('Math.sysio_view',type='m')}}">状態空間表現</a>
+      <a class="dropdown-item" href="{{url_for('Math.sysio_view',type='s')}}">s-domain</a>
+      <a class="dropdown-item" href="{{url_for('Math.sysio_view',type='t')}}">Time Domain</a>
+      <a class="dropdown-item" href="{{url_for('Math.sysio_view',type='m')}}">State-Space Representation</a>
     </div>
   </div>
 </div><br><br><br>
 
 {% if type=="m" %}
-<h3>状態空間表現は開発中</h3>
+<h3>State-space representation is under development</h3>
 {% endif %}
 
 <form action="{{url_for('Math.sysio_view',type=type)}}" method="post" enctype="multipart/form-data">
   {% if type=="s" %}
   <div class="form-group">
-    <label for="InputFormula">伝達関数を入力してください</label>
+    <label for="InputFormula">Please enter the transfer function</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><small>\(G(s)=\)</small></span>
@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="InputFormula_2">入力を入力してください</label>
+    <label for="InputFormula_2">Please enter the input</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><small>\(U(s)=\)</small></span>
@@ -49,7 +49,7 @@
   </div>
   {% elif type=="t" %}
   <div class="form-group">
-    <label for="InputFormula">インパルス応答を入力してください</label>
+    <label for="InputFormula">Please enter the impulse response</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><small>\(g(t)=\)</small></span>
@@ -58,7 +58,7 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="InputFormula_2">入力を入力してください</label>
+    <label for="InputFormula_2">Please enter the input</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><small>\(u(t)=\)</small></span>
@@ -69,35 +69,30 @@
   {% elif type=="m" %}
   <br><br><br>
   <div style="column-count: 2;">
-    <!-- 行列Aの入力 -->
     <div class="form-group">
-      <label for="InputMatrix_A">行列Aを入力してください</label>
+      <label for="InputMatrix_A">Please enter matrix A</label>
       <textarea class="form-control" id="InputMatrix_A" name=matrix_A rows="4">{{matrix_A}}</textarea>
     </div>
-    <!-- 行列Cの入力 -->
     <div class="form-group">
-      <label for="InputMatrix_C">行列Cを入力してください</label>
+      <label for="InputMatrix_C">Please enter matrix C</label>
       <textarea class="form-control" id="InputMatrix_C" name=matrix_C rows="4">{{matrix_C}}</textarea>
     </div>
-    <!-- 行列Bの入力 -->
     <div class="form-group">
-      <label for="InputMatrix_B">行列Bを入力してください</label>
+      <label for="InputMatrix_B">Please enter matrix B</label>
       <textarea class="form-control" id="InputMatrix_B" name=matrix_B rows="4">{{matrix_B}}</textarea>
     </div>
-    <!-- 行列Dの入力 -->
     <div class="form-group">
-      <label for="InputMatrix_D">行列Dを入力してください</label>
+      <label for="InputMatrix_D">Please enter matrix D</label>
       <textarea class="form-control" id="InputMatrix_D" name=matrix_D rows="4">{{matrix_D}}</textarea>
     </div>
   </div>
   <div style="column-count: 2;">
-    <!-- 行列Xの入力 -->
     <div class="form-group">
-      <label for="InputMatrix_X">\(x_0\)を入力してください</label>
+      <label for="InputMatrix_X">Please enter \(x_0\)</label>
       <textarea class="form-control" id="InputMatrix_X" name=matrix_X rows="4">{{matrix_X}}</textarea>
     </div>
     <div class="form-group">
-      <label for="InputFormula">入力を入力してください</label>
+      <label for="InputFormula">Please enter the input</label>
       <div class="input-group">
         <div class="input-group-prepend">
           <span class="input-group-text"><small>\(u(t)=\)</small></span>
@@ -108,7 +103,7 @@
   </div>
   {% endif %}
   <div class="form-group">
-    <label for="LowerEnd">定義域を入力してください</label>
+    <label for="LowerEnd">Please enter the domain</label>
     <div class="form-row align-items-center">
       <div class="col-6">
         <div class="input-group">
@@ -123,7 +118,7 @@
     </div>
   </div>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
@@ -131,52 +126,4 @@
 <div class="accordion" id="accordion_1">
   <div class="card">
     <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">
-      {% if type == "s" %}伝達関数{% elif type == "t" %}インパルス応答{% endif %}
-    </button>
-    {% if init_flag==1 %}
-    <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
-      <div id="parent"></div>
-    </div>
-    {% else %}
-    <div id="collapse_1" class="collapse" aria-labelledby="heading_1" data-parent="#accordion_1">
-      <div id="parent"></div>
-    </div>
-    {% endif %}
-  </div>
-  <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_2" aria-expanded="false" aria-controls="collapse_2">入力入力</button>
-    <div id="collapse_2" class="collapse" aria-labelledby="heading_2" data-parent="#accordion_1">
-      <div id="parent_2"></div>
-    </div>
-  </div>
-</div><br>
-<script type="text/javascript" src="static_math/js/button_x_2.js"></script>
-{% elif type == "m" %}
-<div class="accordion" id="accordion_1">
-  <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">入力入力</button>
-    {% if init_flag==1 %}
-    <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
-      <div id="parent"></div>
-    </div>
-    {% else %}
-    <div id="collapse_1" class="collapse" aria-labelledby="heading_1" data-parent="#accordion_1">
-      <div id="parent"></div>
-    </div>
-    {% endif %}
-  </div>
-</div><br>
-<script type="text/javascript" src="static_math/js/button_x.js"></script>
-{% endif %}
-
-{% if init_flag==0 %}
-<div class="center">
-  {% if type == "m" %}
-  <img src="{{url_for('Math.sysio_graph_png',matrix_A=matrix_A,matrix_B=matrix_B,matrix_C=matrix_C,matrix_D=matrix_D,formula=formula,lower_end=lower_end,upper_end=upper_end,type=type)}}" class="graph"></img>
-  {% else %}
-  <img src="{{url_for('Math.sysio_graph_png',formula=formula,formula_2=formula_2,lower_end=lower_end,upper_end=upper_end,type=type)}}" class="graph"></img>
-  {% endif %}
-</div>
-{% endif %}
-
-{% endblock %}
+      {% if type == "s" %

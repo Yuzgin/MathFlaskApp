@@ -1,5 +1,5 @@
-*
-!**/*.py
-!requirements.txt
-!run_tests.sh
-!templates/
+# *
+# !**/*.py
+# !requirements.txt
+# !run_tests.sh
+# !templates/

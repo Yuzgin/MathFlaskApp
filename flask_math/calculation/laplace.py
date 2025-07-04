@@ -20,8 +20,8 @@ def laplace(formula, type):
             formula = str(formula).replace("Heaviside(", "u_s(")
             return "\mathcal{L}^{-1}["+LATEX(formula)+"]="+LATEX(anser)
         else:
-            flash("type エラー：もう一度入力してください")
+            flash("type is not defined")
         return "Error"
     except:
-        flash("エラー：もう一度入力してください")
+        flash("Please re-enter the input")
         return "Error"

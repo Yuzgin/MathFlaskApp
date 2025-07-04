@@ -10,8 +10,8 @@ def newton_method(number):
             anser = "\sqrt{"+str(number)+"} = "+str(NEWTON_METHOD(number))
         else:
             anser = "Error"
-            flash("エラー：正の数を入力してください")
+            flash("Error: Please enter a positive number")
     except:
         anser = "Error"
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return anser

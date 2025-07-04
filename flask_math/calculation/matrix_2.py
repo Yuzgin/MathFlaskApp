@@ -15,20 +15,20 @@ def calculation(matrixA, matrixB, type, k, l):
         elif type == "B":
             anser = LATEX(B)
         elif type == "kA+lB":
-            anser = LATEX(k*A+l*B)
-            type = str(k)+"A+"+str(l)+"B"
+            anser = LATEX(k*A + l*B)
+            type = str(k) + "A+" + str(l) + "B"
         elif type == "AB":
-            anser = LATEX(A*B)
+            anser = LATEX(A * B)
         elif type == "BA":
-            anser = LATEX(B*A)
-        elif type == "A・B(内積)":
+            anser = LATEX(B * A)
+        elif type == "A・B(Dot Product)":
             anser = LATEX(B.dot(A))
-        elif type == "A×B(外積)":
+        elif type == "A×B(Cross Product)":
             anser = LATEX(A.cross(B))
-        elif type == "B×A(外積)":
+        elif type == "B×A(Cross Product)":
             anser = LATEX(B.cross(A))
-        anser = str(type)+"="+anser
+        anser = str(type) + "=" + anser
     except:
         anser = "Error"
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return anser

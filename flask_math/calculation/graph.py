@@ -17,7 +17,7 @@ def graph(formula_1, lower_end_x, upper_end_x):
 
     fig = plt.figure(figsize=(7, 4))
 
-    # データ作成
+    # Generate data
     dx = diff(formula_1, x)
     dy = diff(formula_1, y)
     if((dx == 0) or (dy == 0)):
@@ -40,12 +40,13 @@ def graph(formula_1, lower_end_x, upper_end_x):
     ax.set_ylabel('y')
     plt.title("$f(x)="+LATEX(formula_1)+"("+str(lower_end_x)+"<x,y<"+str(upper_end_x)+")$")
 
-    # canvasにプロットした画像を出力
+    # Output the plotted image to canvas
     canvas = FigureCanvasAgg(fig)
     png_output = BytesIO()
     canvas.print_png(png_output)
     data = png_output.getvalue()
-    # HTML側に渡すレスポンスを生成する
+
+    # Generate response to send to HTML side
     response = make_response(data)
     response.headers['Content-Type'] = 'image/png'
     response.headers['Content-Length'] = len(data)

@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href="{{url_for('Math.matrix_view')}}" class="heading">行列</a></h2>
+<h2><a href="{{ url_for('Math.matrix_view') }}" class="heading">Matrix</a></h2>
 <br>
 
-<form action='{{url_for("Math.matrix_view")}}' method="post" enctype="multipart/form-data">
-  <!-- 行列Aの入力 -->
+<form action="{{ url_for('Math.matrix_view') }}" method="post" enctype="multipart/form-data">
+  <!-- Input matrix A -->
   <div class="form-group">
-    <label for="InputMatrix">行列Aを入力してください</label>
-    <textarea class="form-control" id="InputMatrix" name=matrix rows="4">{{matrix}}</textarea>
+    <label for="InputMatrix">Please enter matrix A</label>
+    <textarea class="form-control" id="InputMatrix" name="matrix" rows="4">{{ matrix }}</textarea>
   </div>
 
-  <!-- 演算の選択 -->
+  <!-- Operation selection -->
   <div class="center btn_calc">
     <div class="radioArea" id="makeImg">
       {% if type=="A" %}
@@ -33,68 +33,68 @@
       {% endif %}
 
       {% if type=="A^t" %}
-      <input type="radio" name="type" id="r4" value="A^t" checked><label for="r4">転置</label>
+      <input type="radio" name="type" id="r4" value="A^t" checked><label for="r4">Transpose</label>
       {% else %}
-      <input type="radio" name="type" id="r4" value="A^t"><label for="r4">転置</label>
+      <input type="radio" name="type" id="r4" value="A^t"><label for="r4">Transpose</label>
       {% endif %}
 
       {% if type=="\widetilde{A}" %}
-      <input type="radio" name="type" id="r5" value="\widetilde{A}" checked><label for="r5">余因子行列</label>
+      <input type="radio" name="type" id="r5" value="\widetilde{A}" checked><label for="r5">Cofactor matrix</label>
       {% else %}
-      <input type="radio" name="type" id="r5" value="\widetilde{A}"><label for="r5">余因子行列</label>
+      <input type="radio" name="type" id="r5" value="\widetilde{A}"><label for="r5">Cofactor matrix</label>
       {% endif %}
 
       {% if type=="det(A)" %}
-      <input type="radio" name="type" id="r6" value="det(A)" checked><label for="r6">行列式</label>
+      <input type="radio" name="type" id="r6" value="det(A)" checked><label for="r6">Determinant</label>
       {% else %}
-      <input type="radio" name="type" id="r6" value="det(A)"><label for="r6">行列式</label>
+      <input type="radio" name="type" id="r6" value="det(A)"><label for="r6">Determinant</label>
       {% endif %}
 
       {% if type=="rank(A)" %}
-      <input type="radio" name="type" id="r7" value="rank(A)" checked><label for="r7">階数</label>
+      <input type="radio" name="type" id="r7" value="rank(A)" checked><label for="r7">Rank</label>
       {% else %}
-      <input type="radio" name="type" id="r7" value="rank(A)"><label for="r7">階数</label>
+      <input type="radio" name="type" id="r7" value="rank(A)"><label for="r7">Rank</label>
       {% endif %}
 
       {% if type=="tr(A)" %}
-      <input type="radio" name="type" id="r8" value="tr(A)" checked><label for="r8">トレース</label>
+      <input type="radio" name="type" id="r8" value="tr(A)" checked><label for="r8">Trace</label>
       {% else %}
-      <input type="radio" name="type" id="r8" value="tr(A)"><label for="r8">トレース</label>
+      <input type="radio" name="type" id="r8" value="tr(A)"><label for="r8">Trace</label>
       {% endif %}
 
       {% if type=="λ" %}
-      <input type="radio" name="type" id="r9" value="λ" checked><label for="r9">固有値</label>
+      <input type="radio" name="type" id="r9" value="λ" checked><label for="r9">Eigenvalues</label>
       {% else %}
-      <input type="radio" name="type" id="r9" value="λ"><label for="r9">固有値</label>
+      <input type="radio" name="type" id="r9" value="λ"><label for="r9">Eigenvalues</label>
       {% endif %}
 
       {% if type=="P" %}
-      <input type="radio" name="type" id="r10" value="P" checked><label for="r10">対角化行列</label>
+      <input type="radio" name="type" id="r10" value="P" checked><label for="r10">Diagonalizing matrix</label>
       {% else %}
-      <input type="radio" name="type" id="r10" value="P"><label for="r10">対角化行列</label>
+      <input type="radio" name="type" id="r10" value="P"><label for="r10">Diagonalizing matrix</label>
       {% endif %}
 
       {% if type=="P^{-1}AP" %}
-      <input type="radio" name="type" id="r11" value="P^{-1}AP" checked><label　for="r11">対角行列</label>
+      <input type="radio" name="type" id="r11" value="P^{-1}AP" checked><label for="r11">Diagonal matrix</label>
       {% else %}
-      <input type="radio" name="type" id="r11" value="P^{-1}AP"><label for="r11">対角行列</label>
+      <input type="radio" name="type" id="r11" value="P^{-1}AP"><label for="r11">Diagonal matrix</label>
       {% endif %}
 
       {% if type=="Φ(t)" %}
-      <input type="radio" name="type" id="r12" value="Φ(t)" checked><label　for="r12">遷移行列</label>
+      <input type="radio" name="type" id="r12" value="Φ(t)" checked><label for="r12">Transition matrix</label>
       {% else %}
-      <input type="radio" name="type" id="r12" value="Φ(t)"><label for="r12">遷移行列</label>
+      <input type="radio" name="type" id="r12" value="Φ(t)"><label for="r12">Transition matrix</label>
       {% endif %}
     </div>
   </div>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">行列入力</button>
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Matrix Input</button>
     {% if init_flag==1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
@@ -108,15 +108,14 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x_matrix.js"></script>
 
-
 {% if init_flag==0 %}
 <div class="center">
-  <h4 class="latex">\[{{anser}}\]</h4><br>
+  <h4 class="latex">\[{{ anser }}\]</h4><br>
   <h5>\(\LaTeX\)</h5>
   <h5 class="latex" id="targetID">
-      {{anser}}
+      {{ anser }}
   </h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

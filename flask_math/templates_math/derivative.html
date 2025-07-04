@@ -1,84 +1,84 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href="{{url_for('Math.derivative_view')}}" class="heading">微分</a></h2>
+<h2><a href="{{ url_for('Math.derivative_view') }}" class="heading">Differentiation</a></h2>
 <br>
 
-<form action="{{url_for('Math.derivative_view')}}" method="post" enctype="multipart/form-data">
-  <!-- 関数の入力 -->
+<form action="{{ url_for('Math.derivative_view') }}" method="post" enctype="multipart/form-data">
+  <!-- Function Input -->
   <div class="form-group">
-    <label for="InputFormula">関数\(f(x,y,z)\)を入力してください</label>
+    <label for="InputFormula">Please enter the function \(f(x,y,z)\)</label>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text"><small>\(f(x,y,z)=\)</small></span>
       </div>
-      <input type="text" name="formula" class="form-control" id="InputFormula" value="{{formula}}" placeholder="function">
+      <input type="text" name="formula" class="form-control" id="InputFormula" value="{{ formula }}" placeholder="function">
     </div>
   </div><br>
-  <!-- 演算の選択 -->
+  <!-- Operation Selection -->
   <div class="center">
     <div class="radioArea" id="makeImg">
-      {% if type=="x" %}
+      {% if type == "x" %}
       <input type="radio" name="type" id="r1" value="x" checked><label for="r1">\(f_{x}\)</label>
       {% else %}
       <input type="radio" name="type" id="r1" value="x"><label for="r1">\(f_{x}\)</label>
       {% endif %}
 
-      {% if type=="y" %}
+      {% if type == "y" %}
       <input type="radio" name="type" id="r2" value="y" checked><label for="r2">\(f_{y}\)</label>
       {% else %}
       <input type="radio" name="type" id="r2" value="y"><label for="r2">\(f_{y}\)</label>
       {% endif %}
 
-      {% if type=="z" %}
+      {% if type == "z" %}
       <input type="radio" name="type" id="r3" value="z" checked><label for="r3">\(f_{z}\)</label>
       {% else %}
       <input type="radio" name="type" id="r3" value="z"><label for="r3">\(f_{z}\)</label>
       {% endif %}
 
-      {% if type=="xx" %}
+      {% if type == "xx" %}
       <input type="radio" name="type" id="r4" value="xx" checked><label for="r4">\(f_{xx}\)</label>
       {% else %}
       <input type="radio" name="type" id="r4" value="xx"><label for="r4">\(f_{xx}\)</label>
       {% endif %}
 
-      {% if type=="yy" %}
+      {% if type == "yy" %}
       <input type="radio" name="type" id="r5" value="yy" checked><label for="r5">\(f_{yy}\)</label>
       {% else %}
       <input type="radio" name="type" id="r5" value="yy"><label for="r5">\(f_{yy}\)</label>
       {% endif %}
 
-      {% if type=="zz" %}
+      {% if type == "zz" %}
       <input type="radio" name="type" id="r6" value="zz" checked><label for="r6">\(f_{zz}\)</label>
       {% else %}
       <input type="radio" name="type" id="r6" value="zz"><label for="r6">\(f_{zz}\)</label>
       {% endif %}
 
-      {% if type=="xy" %}
+      {% if type == "xy" %}
       <input type="radio" name="type" id="r7" value="xy" checked><label for="r7">\(f_{xy}\)</label>
       {% else %}
       <input type="radio" name="type" id="r7" value="xy"><label for="r7">\(f_{xy}\)</label>
       {% endif %}
 
-      {% if type=="yz" %}
+      {% if type == "yz" %}
       <input type="radio" name="type" id="r8" value="yz" checked><label for="r8">\(f_{yz}\)</label>
       {% else %}
       <input type="radio" name="type" id="r8" value="yz"><label for="r8">\(f_{yz}\)</label>
       {% endif %}
 
-      {% if type=="zx" %}
+      {% if type == "zx" %}
       <input type="radio" name="type" id="r9" value="zx" checked><label for="r9">\(f_{zx}\)</label>
       {% else %}
       <input type="radio" name="type" id="r9" value="zx"><label for="r9">\(f_{zx}\)</label>
       {% endif %}
 
-      {% if type=="grad" %}
+      {% if type == "grad" %}
       <input type="radio" name="type" id="r10" value="grad" checked><label for="r10"><small>\(grad f\)</small></label>
       {% else %}
       <input type="radio" name="type" id="r10" value="grad"><label for="r10"><small>\(grad f\)</small></label>
       {% endif %}
 
-      {% if type=="∆" %}
+      {% if type == "∆" %}
       <input type="radio" name="type" id="r11" value="∆" checked><label for="r11"><small>\(\Delta f\)</small></label>
       {% else %}
       <input type="radio" name="type" id="r11" value="∆"><label for="r11"><small>\(\Delta f\)</small></label>
@@ -86,14 +86,14 @@
     </div>
   </div>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">関数入力</button>
-    {% if init_flag==1 %}
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Function Input</button>
+    {% if init_flag == 1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
     </div>
@@ -106,17 +106,16 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x.js"></script>
 
-
-{% if init_flag==0 %}
+{% if init_flag == 0 %}
 <div class="center">
   {% for anser in Anser %}
-  <h4 class="latex">\({{anser}}\)</h4>
+  <h4 class="latex">\({{ anser }}\)</h4>
   {% endfor %}<br>
   <h5>\(\LaTeX\)</h5>
   {% for anser in Anser %}
-  <h5 class="latex" id="targetID">{{anser}}</h5>
+  <h5 class="latex" id="targetID">{{ anser }}</h5>
   {% endfor %}<br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}

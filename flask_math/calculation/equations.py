@@ -7,17 +7,17 @@ def equations(formula, number):
     try:
         A = solve(formula)
         Anser = []
-        if (number == 1):
-            for i in range(len(A)):
-                a = A[i]
-                for B in a.items():
-                    anser = LATEX(B[0]) + "=" + LATEX(B[1])
+
+        if number == 1:
+            for solution in A:
+                for variable, value in solution.items():
+                    anser = LATEX(variable) + " = " + LATEX(value)
                     Anser.append(anser)
         else:
-            for B in A.items():
-                anser = LATEX(B[0]) + " = " + LATEX(B[1])
+            for variable, value in A.items():
+                anser = LATEX(variable) + " = " + LATEX(value)
                 Anser.append(anser)
     except:
         Anser = ["Error"]
-        flash("エラー：もう一度入力してください")
+        flash("Error: Please re-enter the input")
     return Anser

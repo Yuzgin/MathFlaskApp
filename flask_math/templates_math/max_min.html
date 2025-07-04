@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h2><a href="{{url_for('Math.max_min_view')}}" class="heading">極大値極小値</a></h2>
+<h2><a href="{{url_for('Math.max_min_view')}}" class="heading">Local Maxima and Minima</a></h2>
 <br>
 
 <form action="{{url_for('Math.max_min_view')}}" method="post" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="InputFormula">関数を入力してください</label><br>
+    <label for="InputFormula">Please enter the function</label><br>
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">f(x,y)=</span>
@@ -15,13 +15,13 @@
     </div>
   </div>
   <div class="btn_calc">
-    <button type="submit" class="btn btn-primary btn-block">計算</button>
+    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
   </div>
 </form>
 
 <div class="accordion" id="accordion_1">
   <div class="card">
-    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">式入力</button>
+    <button class="btn btn-secondary btn-block" type="button" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" aria-controls="collapse_1">Expression Input</button>
     {% if init_flag==1 %}
     <div id="collapse_1" class="collapse show" aria-labelledby="heading_1" data-parent="#accordion_1">
       <div id="parent"></div>
@@ -35,7 +35,6 @@
 </div><br>
 <script type="text/javascript" src="static_math/js/button_x.js"></script>
 
-
 {% if init_flag==0 %}
 <div class="center">
   {% for anser in Anser %}
@@ -47,7 +46,7 @@
       {{anser}}
     {% endfor %}
   </h5><br>
-  <button class="btn btn-outline-success" onclick="copy()">コピー</button>
+  <button class="btn btn-outline-success" onclick="copy()">Copy</button>
   <script src="static_math/js/copy.js"></script>
 </div>
 {% endif %}
